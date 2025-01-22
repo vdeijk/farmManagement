@@ -1,17 +1,19 @@
-// src/services/weatherService.ts
 import axios from 'axios';
 
-const API_KEY = '9176d191118d4ac68c3153418240312';
-const BASE_URL = 'https://api.weatherapi.com/v1';
+const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const getWeatherData = async (city: string) => {
+  console.log(VITE_API_KEY + ' ' + VITE_BASE_URL);
+
   try {
-    const response = await axios.get(`${BASE_URL}/current.json`, {
+    const response = await axios.get(`${VITE_BASE_URL}/current.json`, {
       params: {
-        key: API_KEY,
+        key: VITE_API_KEY,
         q: city,
       },
     });
+
     return response.data;
   } catch (error) {
     console.error('Error fetching weather data:', error);
